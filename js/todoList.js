@@ -1,38 +1,49 @@
+import { Api } from "./api.js";
+
 export class TodoList {
 
     // tasks repository
     
-    // tasks = [{ value: string, isCompleted: boolean }]
+    // tasks = [{ id: int, value: string, isCompleted: boolean }]
     #tasks = [];
-    
-    getTask(index) {
-        return this.#tasks[index];
+    #api;
+
+    constructor() {
+        this.#api = new Api;
+        this.loadTasks();
     }
 
-    getTasks() {
-        return [...this.#tasks];
+    async loadTasks() {
+        this.#tasks = await this.getTasks();
     }
 
-    setTask (value, index=null) {
-        if (index) {
-            if (this.#tasks[index]) { 
-                const { isCompleted } = this.#tasks[index];
-                this.#tasks[index] = {value, isCompleted };
-                return true;
+    getTask(id) {
+        return this.#tasks.find(el => el.id === id);
+    }
+
+    async getTasks() {
+        return await this.#api.read();
+    }
+
+    async setTask (name, id=null, completed=null) {
+        if (id) {
+            const task = this.getTask(id);
+            if (task) { 
+                task.name = name;
+                task.completed = completed ? 1 : 0;
+                return await this.#api.edit(task.id, task.name, task.completed);
             }
-        }    
-        this.#tasks.push({ value: '' + value, isCompleted: false });
-        return this.#tasks.length - 1;
+        } else {
+            return await this.#api.add(name);
+        } 
     }
 
-    delete(index) {
-        if (this.#tasks[index]) {
-            delete this.#tasks[index];
-        }
+    async delete(id) {
+        return await this.#api.delete(id);
     }
 
-    complete(isCompleted = true, index) {
-        const { value } = this.#tasks[index];
-        this.#tasks[index] = { value, isCompleted };
+    async complete(completed = true, id) {
+        const task = this.getTask(id);
+        return await this.setTask(task.name, id, completed);
     }
 }

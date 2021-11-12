@@ -3,8 +3,6 @@
 }
 
 html, body {
-    height: 100%;
-    width: 100%;
     margin: 0;
     padding: 0;
 }
@@ -34,9 +32,12 @@ main {
 .content {
     background: rgb(31,78,157);
     background: linear-gradient(180deg, rgba(31,78,157,1) 0%, rgba(62,134,187,1) 80%, rgba(0,212,255,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     flex: 1;
     box-shadow: -2px 2px 5px 1px #EAEAEA;
     min-height: 20em;
+    padding-bottom: 3em;
 }
 
 .content__field {
@@ -168,4 +169,10 @@ main {
     height: 100%;
     outline: none;
     width: 100%;
+}
+
+.todo__list-date {
+    color: rgba(62,134,187,1);
+    font-weight: bold;
+    font-size: 0.6em;       
 }

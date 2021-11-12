@@ -13,6 +13,7 @@ export class TodoView {
         this.table = table;
         this.sortButton = sortButton;
         this.order = 'desc';
+        this.render();
     }
 
     clearInput () {
@@ -30,7 +31,12 @@ export class TodoView {
         this.render();
     }
 
-    renderElement = (value, index, isCompleted) => {
+    formatDate = date => {
+        const d = new Date(date); 
+        return '' + d.getDay() + ' ' + d.toLocaleString('default', {month: 'short'}) +   ' ' + d.getFullYear();
+    }
+
+    renderElement = (value, index, isCompleted, date) => {
         let classes = [];
         let attrs = {};
 
@@ -40,55 +46,59 @@ export class TodoView {
         attrs = { 'data-id':  index };
         const listEl = new NewElement('li', null, classes, attrs).getEl();
 
+        // date
+        classes = ['todo__list-date'];
+        const listDate = new NewElement('p', this.formatDate(date), classes).getEl();
+
         // checkbox
         classes = ['todo__list-checkbox'];
-        attrs = {'type': 'checkbox'};
+        attrs = {'type': 'checkbox', tabindex: '-1'};
         if (isCompleted) { attrs.checked = 'true'; }
         const listElCheck = new NewElement('input', '', classes, attrs).getEl();
 
         // p
         const listElP = new NewElement('p', value, ['todo__list-p'], {'contenteditable': 'true' }).getEl();
-        
+
         listEl.append(listElCheck);
         listEl.append(listElP);
+        //listEl.append(listDate);
         return listEl;
     }
 
-    render() {
-        const tasks = this.list.getTasks();
+    async render() {
+        const tasks = await this.list.getTasks();
         if (this.order === 'desc') { tasks.reverse(); }
         this.table.innerHTML = '';
         tasks.forEach((el, i) => {
-            if (el) {
-                this.table.append(this.renderElement(el.value, i, el.isCompleted))
-        }});
+            if (el) { this.table.append(this.renderElement(el.name, el.id, +el.completed, el.created)) }});
     }
 
-    addTask() {
+    async addTask() {
         const val = this.input.value;
+        const render = this.render.bind(this);
         if (val.length === 0) { return; }
-        const index = this.list.setTask(val);
-        const listEl = this.renderElement(val, index);
-        this.order === 'desc' ? this.table.prepend(listEl) : this.table.append(listEl);
+        Promise.resolve(this.list.setTask(val)).then(function() { render(); });
         this.clearInput();
     }
 
     editTask(task) {
-        const value = task.innerHTML;
-        const index = task.parentNode.getAttribute('data-id');
-        if (value.length === 0) {
-            this.list.delete(index);
+        const render = this.render.bind(this);
+        const name = task.innerHTML;
+        const id = task.parentNode.getAttribute('data-id');
+        if (name.length === 0) {
             task.parentNode.remove();
+            Promise.resolve(this.list.delete(id)).then(function() { render(); });
         } else {
-            this.list.setTask(value, index);
+            Promise.resolve(this.list.setTask(name, id)).then(function() { render(); });
         }
     }
 
     completeTask(taskCheckbox) {
         const value = taskCheckbox.checked;
         const taskParent = taskCheckbox.parentNode;
-        const index = taskParent.getAttribute('data-id');
-        this.list.complete(value, index);
-        value ? taskParent.classList.add('todo__list-item_done') : taskParent.classList.remove('todo__list-item_done');
+        const id = taskParent.getAttribute('data-id');
+        Promise.resolve(this.list.complete(value, id)).then(function() {
+            value ? taskParent.classList.add('todo__list-item_done') : taskParent.classList.remove('todo__list-item_done');
+        });
     }
 }

@@ -18,11 +18,6 @@ document.querySelector('.todo__list').addEventListener('keypress', (event) => {
         event.preventDefault();
     }
 });
-document.querySelector('.todo__list').addEventListener('focusout', (event) => {
-    if (event.target.classList.contains('todo__list-p')) {
-        view.editTask(event.target);
-    }
-});
 
 // complete task
 document.querySelector('.todo__list').addEventListener('click', (event) => {
