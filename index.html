@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List</title>
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <script defer type="module" src="js/newElement.js"></script>
+    <script defer type="module" src="js/todoList.js"></script>
+    <script defer type="module" src="js/todoView.js"></script>
+    <script defer type="module" src="js/eventHandlers.js"></script>
+</head>
+<body>
+    <main>
+        <section class="content">    
+            <h1 class="main_header">Todo List</h1>
+            <div class="todo">
+                <div class="todo__add">
+                    <input class="content__input content__text todo__add-input" type="text" autofocus />
+                    <button class="content__input content__button todo__add-button button_blue">Add task</button>
+                    <button class="content__input content__button todo__sort-button button_grey">&darr;</button>
+                </div>
+                <ul class="todo__list"></ul>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
