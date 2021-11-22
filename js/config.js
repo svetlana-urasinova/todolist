@@ -1,6 +1,6 @@
 export class Config {
     
-    #url = 'http://spacefugu.ru/todo/';
+    #url = '';
 
     getUrl () {
         return this.#url;
