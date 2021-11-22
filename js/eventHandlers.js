@@ -11,13 +11,17 @@ document.querySelector('.todo__add-input').addEventListener('keypress', (event) 
     if (event.key === 'Enter') { view.addTask(); }
 });
 
-// edit or remove task
+//edit or remove task
 document.querySelector('.todo__list').addEventListener('keypress', (event) => {
     if (event.key === 'Enter') { 
         view.editTask(event.target);
         event.preventDefault();
     }
 });
+
+document.querySelector('.todo__list').addEventListener('focusout', (event) => {
+        view.editTask(event.target);
+}, { once: true });
 
 // complete task
 document.querySelector('.todo__list').addEventListener('click', (event) => {

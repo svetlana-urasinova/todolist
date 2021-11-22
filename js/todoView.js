@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable no-unused-expressions */
 import { TodoList } from "./todoList.js";
 import { NewElement } from "./newElement.js";
 
@@ -84,12 +82,16 @@ export class TodoView {
     editTask(task) {
         const render = this.render.bind(this);
         const name = task.innerHTML;
-        const id = task.parentNode.getAttribute('data-id');
-        if (name.length === 0) {
-            task.parentNode.remove();
-            Promise.resolve(this.list.delete(id)).then(function() { render(); });
-        } else {
-            Promise.resolve(this.list.setTask(name, id)).then(function() { render(); });
+        if (task.parentNode) {
+            const id = task.parentNode.getAttribute('data-id');
+            if (name.length === 0) {
+                try { task.parentNode.remove(); }
+                catch(err) { return err; }
+                Promise.resolve(this.list.delete(id)).then(function() { render(); });
+            } else {
+                //Promise.resolve(this.list.setTask(name, id)).then(function() { render(); });
+                Promise.resolve(this.list.setTask(name, id));
+            }
         }
     }
 

@@ -4,7 +4,7 @@ export class TodoList {
 
     // tasks repository
     
-    // tasks = [{ id: int, value: string, isCompleted: boolean }]
+    // tasks = [{ id: int, name: string, completed: boolean, created: string, modified: string }]
     #tasks = [];
     #api;
 
@@ -15,6 +15,7 @@ export class TodoList {
 
     async loadTasks() {
         this.#tasks = await this.getTasks();
+        console.log(this.#tasks);
     }
 
     getTask(id) {
