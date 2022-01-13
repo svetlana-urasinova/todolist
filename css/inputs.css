@@ -1,0 +1,61 @@
+.standard-input {
+    border: 1px solid #ddd;
+    border-radius: 0.4rem;
+    font-size: 1.1rem;
+    line-height: 2rem;
+    margin: 0.1rem 0.2rem;
+    padding: 0.6rem 0.4rem;
+}
+
+.standard-text {
+    background-color: #fff;
+    color: inherit;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.standard-text:focus {
+    background-color: #fcf9f0;
+    border-color: #cacaca;
+    outline: none;
+}
+
+.standard-button {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.standard-checkbox-container {
+    padding-left: 3rem;
+    position: relative;
+}
+
+.standard-checkbox {
+    display: none;
+}
+
+
+.standard-checkbox-label {
+    cursor: pointer;
+    position: relative;
+}
+
+.standard-checkbox-label::before {
+    border: 2px solid #5a5a5a;
+    content: "";
+    height: 1rem;
+    left: -3rem;
+    position: absolute;
+    top: -0.5rem;
+    transition: all 0.3s ease-in-out;
+    width: 1rem;
+    z-index: 1;
+}
+
+.standard-checkbox:checked ~ .standard-checkbox-label::before {
+    border: 3px solid #7fb84d;
+    border-right: none;
+    border-top: none;
+    height: 0.5rem;
+    transform: rotate(-45deg);
+}

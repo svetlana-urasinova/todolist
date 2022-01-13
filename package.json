@@ -1,0 +1,25 @@
+{
+  "name": "todo_list",
+  "version": "1.0.0",
+  "description": "A list of tasks you need to complete. You can add, edit or delete any task in the list.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svetlana-urasinova/todolist.git"
+  },
+  "keywords": [
+    "todo"
+  ],
+  "author": "Svetlana Urasinova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/svetlana-urasinova/todolist/issues"
+  },
+  "homepage": "https://github.com/svetlana-urasinova/todolist#readme",
+  "devDependencies": {
+    "jest": "^27.4.7"
+  }
+}
