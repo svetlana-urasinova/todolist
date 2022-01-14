@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
+
+.footer-credits {
+    background-color: #333;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+.footer-credits__signature {
+    font: normal 1.5rem Comforter Brush, coursive; 
+    text-decoration: none;
+}
+
+.footer-credits a {
+    color: #49a6e9;
+    cursor: pointer;
+    display: block;    
+    margin: 0 0.5rem;
+    text-decoration: underline;
+}
+
+.footer-credits a:visited {
+    color: #aaa;
+}
+
+.footer-credits a:hover, .footer-credits a:active {
+    color: darkorange;
+}

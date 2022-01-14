@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO List</title>
     <link rel="shortcut icon" href="">
-    <link rel="stylesheet" href="/css/buttons.css">
-    <link rel="stylesheet" href="/css/inputs.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <script defer type="module" src="/js/eventHandlers.js"></script>
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/inputs.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <script defer type="module" src="js/eventHandlers.js"></script>
 </head>
 <body>
     <main>
@@ -18,12 +19,17 @@
             <div class="todo">
                 <div class="todo-add__container">
                     <input class="standard-input standard-text todo-add__input" type="text" autofocus />
-                    <button class="standard-input standard-button colored-button _blue todo-add__button">Add task</button>
+                    <button class="standard-input standard-button colored-button _green todo-add__button">
+                        <span class="todo-add__button-text">+</span>
+                    </button>
                     <button class="standard-input standard-button colored-button _grey todo-add__order-button" data-order="desc">&darr;</button>
                 </div>
                 <ul class="todo-list"></ul>
             </div>
         </section>
     </main>
+    <footer class="footer-credits">
+        <a href="http://spacefugu.ru/portfolio" class="footer-credits__signature">spacefugu.</a>
+    </footer>
 </body>
 </html>

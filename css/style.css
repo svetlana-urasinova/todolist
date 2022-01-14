@@ -11,7 +11,12 @@ html, body {
 
 body {
     color: #333;
-    font: normal 1rem Roboto, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    font: normal 1rem Roboto, sans-serif; 
+    justify-items: flex-end;
+    line-height: 1.2;
+    min-height: 100vh;
 }
 
 main {
@@ -19,14 +24,15 @@ main {
     align-content: stretch;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    flex-grow: 1;
     justify-content: flex-start;
 }
 
 .main-header {
     color: #fff;
     font-size: 2rem;
-    padding: 0.5rem;
+    margin: 0;
+    padding: 2rem 0.5rem;
     text-align: center;
     text-transform: uppercase;
 }
@@ -61,6 +67,7 @@ main {
 .todo-add__container {
     display: flex;
     margin-bottom: 2em;
+    position: relative;
 }
 
 .todo-add__input {
@@ -72,9 +79,33 @@ main {
 .todo-add__button {
     border-left: none;
     border-radius: 0 0.3em 0.3em 0;
-    font-size: 0.9em;
+    font-size: 1.1em;
     margin-left: 0;
     padding: 0.3em 1.3em;
+    position: relative;
+}
+
+.todo-add__button-text {
+    display: none;
+}
+
+.todo-add__button::after {
+    content: 'Add task';
+}
+
+@media screen and (max-width: 768px) {
+    .todo-add__button {
+        -webkit-appearance: none;
+    }
+    
+    .todo-add__button::after {
+        content: '';
+    }
+
+    .todo-add__button-text {
+        display: inline;
+        font-size: 2.5rem;
+    }
 }
 
 .todo-add__order-button {
