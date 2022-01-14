@@ -1,5 +1,6 @@
 import { View } from "./classes/View.js";
 import { Api } from "./classes/Api.js";
+import { Autosave } from "./classes/Autosave.js";
 
 const addInput = document.querySelector('.todo-add__input');
 const addButton = document.querySelector('.todo-add__button');
@@ -11,7 +12,7 @@ const getOrder = () => orderButton.dataset.order;
 
 const render = () => view.render(getOrder());
 
-// add
+// add new task
 
 const addTask = () => {
     const name = addInput.value;
@@ -21,14 +22,28 @@ const addTask = () => {
         .then(() => render());
 }
 
-const addTaskByEnter = event => {
-    if (event.key === 'Enter') { addTask(); }
+// autosave
+
+const addInputHandler = event => {
+    if (event.key === 'Enter') { 
+        addTask(); 
+        Autosave.clear();
+    } else {
+        const name = addInput.value;
+        Autosave.set(name);
+    }
 }
-
 addButton.addEventListener('click', addTask);
-addInput.addEventListener('keyup', addTaskByEnter);
+addInput.addEventListener('keyup', addInputHandler);
 
-// edit / remove
+// load new task from autosave
+
+const addInputOnload = () => {
+    addInput.value = Autosave.get();
+}
+document.addEventListener('DOMContentLoaded', addInputOnload);
+
+// edit / remove existing task
 
 const editTask = event => {
     const listItem = event.target.closest('.todo-list__item');
@@ -83,5 +98,4 @@ const orderHandler = () => {
     }
     render();
 }
-
 orderButton.addEventListener('click', orderHandler);
