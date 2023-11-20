@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/svetlana-urasinova/todolist#readme",
   "devDependencies": {
-    "jest": "^27.4.7"
+    "jest": "^29.7.0"
   }
 }
